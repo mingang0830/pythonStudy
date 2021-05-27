@@ -21,14 +21,18 @@ while True:
     if not validate_digit(is_digit):
         continue
 
-    operator = input("연산 입력 : ")
-    if operator not in ["+", "-", "*", "/"]:
-        print(ERROR_MESSAGE)
-        continue
+    while True:
+        operator = input("연산 입력 : ")
+        if operator not in ["+", "-", "*", "/"]:
+            print(ERROR_MESSAGE)
+            continue
+        break
 
-    second_digit, is_digit = is_digit_with_input("두번째")
-    if not validate_digit(is_digit):
-        continue
+    while True:
+        second_digit, is_digit = is_digit_with_input("두번째")
+        if not validate_digit(is_digit):
+            continue
+        break
 
     result = None
     if operator == "+":
@@ -41,3 +45,4 @@ while True:
         result = float(first_digit) / float(second_digit)
 
     print(result)
+
