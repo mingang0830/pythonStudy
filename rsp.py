@@ -3,36 +3,26 @@ win_count = 0
 player_result = None
 computer_result = None
 game_result = None
+result_message = None
 
 
 def game(player, computer):
     player_select = None
     computer_select = None
     result = None
+    if (player == "1" and computer == "1") or (player == "2" and computer == "2") or (player == "3" and computer == "3"):
+        result = "무승부"
+    elif (player == "1" and computer == "3") or (player == "2" and computer == "1") or (player == "3" and computer == "2"):
+        result = "승리"
+    elif (player == "1" and computer == "2") or (player == "2" and computer == "3") or (player == "3" and computer == "1"):
+        result = "패배"
+
     if player == "1":
         player_select = "가위"
-        if computer == "1":
-            result = "무승부"
-        elif computer == "2":
-            result = "패배"
-        elif computer == "3":
-            result = "승리"
     elif player == "2":
         player_select = "바위"
-        if computer == "1":
-            result = "승리"
-        elif computer == "2":
-            result = "무승부"
-        elif computer == "3":
-            result = "패배"
     elif player == "3":
         player_select = "보"
-        if computer == "1":
-            result = "패배"
-        elif computer == "2":
-            result = "승리"
-        elif computer == "3":
-            result = "무승부"
 
     if computer == "1":
         computer_select = "가위"
@@ -41,7 +31,8 @@ def game(player, computer):
     elif computer == "3":
         computer_select = "보"
 
-    return player_select, computer_select, result
+    message = f"플레이어: {player_select} - 컴퓨터: {computer_select} = {result}"
+    return result, message
 
 
 while True:
@@ -54,7 +45,7 @@ while True:
         continue
 
     if player in ["1", "2", "3"]:
-        player_result, computer_result, game_result = game(player, computer)
+        game_result, result_message = game(player, computer)
     elif player == "4":
         print("프로그램 종료")
         break
@@ -62,6 +53,5 @@ while True:
     if game_result == "승리":
         win_count += 1
 
-    result_message = f"플레이어: {player_result} - 컴퓨터: {computer_result} = {game_result}"
     print(result_message)
     print("이긴 라운드 수 : %d" % win_count)
