@@ -12,7 +12,7 @@ class Computer:
         message = None
         is_end = False
         if Player.hp >= Computer.power:
-            Player.hp = Player.hp - Computer.power
+            Player.hp -= Computer.attack(self)
             message = "플레이어 hp [%d], 컴퓨터 hp [%d] 컴퓨터 승" % (Player.hp, Computer.hp)
         elif Player.hp == 0:
             message = "플레이어 hp [%d], 컴퓨터 hp [%d] 최종 우승 : 컴퓨터\n 게임 종료" % (Player.hp, Computer.hp)
@@ -31,7 +31,7 @@ class Player:
         message = None
         is_end = False
         if Computer.hp >= Player.power:
-            Computer.hp = Computer.hp - Player.power
+            Computer.hp -= Player.attack(self)
             message = "플레이어 hp [%d], 컴퓨터 hp [%d] 플레이어 승" % (Player.hp, Computer.hp)
         elif Computer.hp == 0:
             message = "플레이어 hp [%d], 컴퓨터 hp [%d] 최종 우승 : 플레이어\n 게임 종료" % (Player.hp, Computer.hp)
@@ -61,7 +61,6 @@ class Game:
             result, is_end_result = computer_win.status()
 
         return result, is_end_result
-
 
 
 while True:
