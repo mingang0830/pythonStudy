@@ -1,6 +1,7 @@
 class People:
     def __init__(self, name):
         self.name = name
+        self.perform = None  # 공연 횟수
 
     def performance(self):
         pass
@@ -15,7 +16,7 @@ class People:
         pass
 
 
-class Idol(People):
+class Idol(People):  # 솔로
     def __init__(self, i_name, g_name, fanclub, name):
         super().__init__(name)
         self.i_name = i_name  # 아이돌 이름
@@ -23,7 +24,7 @@ class Idol(People):
         self.fanclub = fanclub  # 팬클럽 이름
 
 
-class Group(Idol):
+class Group(Idol):  # idol에서 데려오기
     def g_performance(self):
         pass
 
