@@ -1,12 +1,14 @@
 class People:
     def __init__(self, name):
         self.name = name
-        self.perform = None  # 공연 횟수
+        self.perform = 0  # 공연 횟수
 
     def performance(self):
+        self.perform += 1
         pass
 
     def is_fanclub(self):
+
         pass
 
     def audition(self):
