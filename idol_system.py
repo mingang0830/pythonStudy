@@ -37,10 +37,11 @@ class Fanclub(Group):
         self.total = None  # 팬클럽 회원 수
 
     def join(self, number):
-        pass
+        self.total = self.total + number
 
     def withdraw(self, number):
-        pass
+        self.total = self.total - number
+
 
 
 class Agency(Group):
