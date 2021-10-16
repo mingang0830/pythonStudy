@@ -3,7 +3,7 @@ from random import choice
 
 class Fanclub:
     def __init__(self, fanclub):
-        self.total = 10  # 팬클럽 회원 수
+        self.total = 10  # 팬클럽 회원 수(팬클럽이 있다면 10명부터 시작)
         self.fanclub = fanclub  # 팬클럽 이름
 
     def join(self, number):
@@ -43,7 +43,7 @@ class People(Fanclub):
 
     def release_album(self, f_lst):  # 딕셔너리 받기
 
-        #딕셔너리 값을 기준으로 내림차준 정렬
+        # 딕셔너리 값을 기준으로 내림차준 정렬
         sort_f = sorted(f_lst.values())
 
         # 1,2,3위 변수 지정
@@ -85,20 +85,36 @@ class People(Fanclub):
 
 
 class Idol(People):  # 솔로
-    def __init__(self, i_name, g_name, fanclub, name):
-        super().__init__(name, fanclub)
-        self.i_name = i_name  # 아이돌 이름
-        self.g_name = g_name  # 그룹 이름
+
+    def performance(self):
+        self.perform += 1
+        # 만약 팬클럽이 있다면
+        if self.is_fanclub():
+            # 공연할때마다 팬클럽에 속한 사람들의 30%만큼 팬이 증가합니다.
+            self.total += int(self.total * 0.3)
+        else:
+            self.fanclub = input('팬클럽 생성 : ')  # 팬클럽 이름 지정
+            self.total = 10  # 팬클럽 회원수 추가
+
+    def audition(self): # 소속사에 지원하면 데뷰할 수 없습니다.
+        print('이미 데뷰해서 오디션에 지원할 수 없습니다.')
 
 
 class Group(Idol):  # idol에서 데려오기
-    def g_performance(self):
-        pass
+    def __init__(self, g_name, name, fanclub):
+        super().__init__(name, fanclub)
+        self.g_name = g_name  # 그룹 이름
+
+    def performance(self):
+        self.perform += 1
 
 
 class Agency(Group):
 
     def solo_debut(self):
+        #if self.total >= 50 and self.perform >= 5:
+        #   print('{0} 데뷔!!'.format(self.name))
+        #print('데뷔 못함')
         pass
 
     def group_debut(self):
@@ -110,24 +126,33 @@ if __name__ == "__main__":
     jay = People('제이', '재프')
     jay.performance()
     print(jay.fanclub)
-
     jay.performance()
-    jaf = jay.total
 
-    min = People('민','민트')
+    min = People('민', None)
     min.performance()
     print(min.fanclub)
     min.join(50)
-    mint = min.total
 
     qq = People('큐', '큐프')
     qq.performance()
     qq.join(2)
-    qf = qq.total
 
-    f_lst = {'mint': mint, 'jaf': jaf, 'qf': qf}
+    f_lst = {'mint': min.total, 'jaf': jay.total, 'qf': qq.total}
 
     print(f_lst)
 
     min.release_album(f_lst)
     print(min.total)
+
+    iu = Idol('아이유', '유애나')
+    iu.performance()
+    print(iu.total)
+    print(iu.fanclub)
+
+    f_lst = {'mint': min.total, 'jaf': jay.total, 'qf': qq.total, '유애나': iu.total}
+    iu.release_album(f_lst)
+
+    iu.audition()
+
+
+
