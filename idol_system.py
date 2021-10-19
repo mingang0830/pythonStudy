@@ -41,10 +41,10 @@ class People(Fanclub):
     def audition(self):
         pass
 
-    def release_album(self, f_lst):  # 딕셔너리 받기
+    def release_album(self, f_lst):  # 라스트 받기
 
-        # 딕셔너리 값을 기준으로 내림차준 정렬
-        sort_f = sorted(f_lst.values())
+        # 리스트 정렬
+        sort_f = sorted(f_lst)
 
         # 1,2,3위 변수 지정
         first = sort_f[0]
@@ -97,7 +97,7 @@ class Idol(People):  # 솔로
             self.total = 10  # 팬클럽 회원수 추가
 
     def audition(self): # 소속사에 지원하면 데뷰할 수 없습니다.
-        print('이미 데뷰해서 오디션에 지원할 수 없습니다.')
+        print('이미 데뷔해서 오디션에 지원할 수 없습니다.')
 
 
 class Group(Idol):  # idol에서 데려오기
@@ -137,7 +137,7 @@ if __name__ == "__main__":
     qq.performance()
     qq.join(2)
 
-    f_lst = {'mint': min.total, 'jaf': jay.total, 'qf': qq.total}
+    f_lst = [min.total, jay.total, qq.total]
 
     print(f_lst)
 
@@ -149,7 +149,7 @@ if __name__ == "__main__":
     print(iu.total)
     print(iu.fanclub)
 
-    f_lst = {'mint': min.total, 'jaf': jay.total, 'qf': qq.total, '유애나': iu.total}
+    f_lst = [min.total, jay.total, qq.total, iu.total]
     iu.release_album(f_lst)
 
     iu.audition()
