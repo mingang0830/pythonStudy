@@ -43,7 +43,7 @@ if __name__ == "__main__":
     p2 = Pro()
     stu1 = Student("김동욱")
 
-    sub_list = []
+    sub_list = []  # 개설된 강의 리스트
     for pro, name, desc, limit in [(p1, "자료구조", "자료의 구조", 1),
                                    (p1, "컴퓨터의 기본", "기본", 2),
                                    (p2, "수학개론", "수학", 3),
@@ -51,10 +51,10 @@ if __name__ == "__main__":
                                    (p2, "생물개론", '생물', 5)]:
         sub_list.append(pro.open_sub(name, desc, limit))
 
-    sub_list[0].join(stu1)
+    sub_list[0].join(stu1)  # 수강신청
     sub_list[2].join(stu1)
     sub_list[4].join(stu1)
 
-    for sub in sub_list:
+    for sub in sub_list:  # 정원 안찬 강의 폐강시키기
         sub.close()
         print(sub.is_deleted)
