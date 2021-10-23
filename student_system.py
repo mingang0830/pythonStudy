@@ -55,6 +55,6 @@ if __name__ == "__main__":
     sub_list[2].join(stu1)
     sub_list[4].join(stu1)
 
-    for sub in sub_list:  # 정원 안찬 강의 폐강시키기
+    for sub in sub_list:  # 정원 안 찬 강의 폐강시키기
         sub.close()
         print(sub.is_deleted)
