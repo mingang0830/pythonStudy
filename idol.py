@@ -46,6 +46,7 @@ class BubbleChat:
 
 
 if __name__ == "__main__":
+
     sj = Idol('슈퍼주니어')
     sj.debut_idol('동해')
     sj.debut_idol('은혁')
