@@ -1,5 +1,8 @@
 import sqlite3
 
+conn = sqlite3.connect('store_sys.db')
+cur = conn.cursor()
+
 
 class Product:
     def __init__(self, id, name, price, store):
@@ -14,7 +17,7 @@ class Product:
 
 class Store:
     def __init__(self, store_name):
-        self.store_name = store_name
+        self.store_name = store_name[1]
         self.products = {}
         self.check_stock = {}
 
@@ -56,20 +59,32 @@ class Customer:
 
 if __name__ == "__main__":
 
-    s1 = Store('문구점')
+    stationery_store = cur.execute("select * from store where id=1").fetchone()
+    s1 = Store(stationery_store)
     c1 = Customer()
 
-    for id, name, price, store, amount in [(1,'연필', 1000, s1, 4),
-                                              (2, '샤프', 1000, s1, 3),
-                                              (3, '지우개', 1000, s1, 2),
-                                              (4, '화이트', 1000, s1, 2),
-                                              ]:
-        s1.buy(Product(id, name, price, store), amount)
+    # product에 물품 추가
+    cur.execute("INSERT INTO product Values(5, '마카', 2000);")
+    cur.execute("INSERT INTO stock Values(5, 1, 5);")
+
+    # product에서 물건 가져오기
+    pencil = cur.execute("select * from product where id=1").fetchone()
+    sharp = cur.execute("select * from product where id=2").fetchone()
+    eraser = cur.execute("select * from product where id=3").fetchone()
+    white = cur.execute("select * from product where id=4").fetchone()
+    mark = cur.execute("select * from product where id=5").fetchone()
+
+    for id, name, price in [pencil,
+                            sharp,
+                            eraser,
+                            white,
+                            mark]:
+        s1.buy(Product(id, name, price, s1), 4)
 
     print(s1.products)
-    print(s1.get_product_id_by_name('연필'))
+    print(s1.get_product_id_by_name('마카'))
 
-    c1.buy(s1, '연필', 3)
+    c1.buy(s1, '연필', 4)
     c1.buy(s1, '샤프', 3)
     c1.buy(s1, '지우개', 2)
 
@@ -77,6 +92,5 @@ if __name__ == "__main__":
     print(s1.check_stock)
     print(s1.out_of_stock())
 
-
-
+    # print([row for row in cur.execute("select * from product")])
 
