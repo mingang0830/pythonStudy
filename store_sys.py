@@ -3,16 +3,55 @@ import sqlite3
 conn = sqlite3.connect('store_sys.db')
 cur = conn.cursor()
 
+# SOLID
+# S: 단일 책임의 원칙
 
+# product_db.py
+def make_product_map(data):
+    return {
+        "id": data[0],
+        "name": data[1],
+        "price": data[2],
+    }
+
+def select_product_by_id_from_db(id):
+    return cur.execute("select id, name, price from product where id = (?)", (id,)).fetchone()
+
+def insert_product_to_db(name, price):
+    return cur.execute("insert into product (name, price) values(?,?)", (name, price))
+
+# new_product_db.py
+def select_new_product_by_id_from_db(id):
+    pass
+
+# product_model.py
+def get_product_by_id(id):
+    data = select_new_product_by_id_from_db(id)
+    return make_product_map(data)
+
+def create_product(name, price):
+    return make_product_map(insert_product_to_db(name, price))
+
+# product_obj.py
+# CQRS 명령과 쿼리의 분리
 class Product:
     def __init__(self, id, name, price):
-        cur.execute("insert into product values(?,?,?)", (id, name, price))
         self.id = id
         self.name = name
         self.price = price
 
     def __repr__(self):
         return f"('{self.name}', {self.price})"
+
+def get_product_obj_by_id(id):
+    data = get_product_by_id(id)
+    return Product(id=data["id"], name=data["name"], price=data["price"])
+
+def program1():
+    get_product_obj_by_id(1)
+
+def program2():
+    Product(id=2, name="test", price=12000)
 
 
 class Store:
@@ -62,39 +101,43 @@ class Customer:
 
 
 if __name__ == "__main__":
+    cur.execute("insert into product (name, price) values(?,?)", ("가위", 1000))
+    # prepared statement
+    p1 = Product(name="풀", price=1000)
 
-    s1 = Store(1, '문방구')
-    s2 = Store(2, '문방구2')
-    c1 = Customer()
+    # print(p1)
+    # s1 = Store(1, '문방구')
+    # s2 = Store(2, '문방구2')
+    # c1 = Customer()
     # print(s1.id)
     # print(s1.name)
 
-    for id, name, price, amount in [(1, '연필', 1000, 4),
-                                    (2, '샤프', 1000, 3),
-                                    (3, '지우개', 1000, 2),
-                                    (4, '화이트', 1000, 1),
-                                    (5, '형광펜', 1600, 4)]:
-        s1.buy(Product(id, name, price), amount)
-
-    tape = Product(6, '테이프', 1200)
-    paper = Product(7, '종이', 1100)
-
-    s1.buy(tape, 2)
-    s2.buy(tape, 3)
-    s2.buy(paper, 2)
-
-    print(s1.products)
+    # for id, name, price, amount in [(1, '연필', 1000, 4),
+    #                                 (2, '샤프', 1000, 3),
+    #                                 (3, '지우개', 1000, 2),
+    #                                 (4, '화이트', 1000, 1),
+    #                                 (5, '형광펜', 1600, 4)]:
+    #     s1.buy(Product(id, name, price), amount)
+    #
+    # tape = Product(6, '테이프', 1200)
+    # paper = Product(7, '종이', 1100)
+    #
+    # s1.buy(tape, 2)
+    # s2.buy(tape, 3)
+    # s2.buy(paper, 2)
+    #
+    # print(s1.products)
     # print(s2.products())
 
     # print(s2.get_product_id_by_name('종이'))
     #
-    print(cur.execute("select * from stock").fetchall())  # 왜 stock의 id가 1부터 안들어가지?
+    # print(cur.execute("select * from stock").fetchall())  # 왜 stock의 id가 1부터 안들어가지?
 
-    c1.buy(s1, '연필', 4)
-    print(c1.purchase_list)
-
-    print(s1.check_stock)
-    print(s1.out_of_stock())
+    # c1.buy(s1, '연필', 4)
+    # print(c1.purchase_list)
+    #
+    # print(s1.check_stock)
+    # print(s1.out_of_stock())
 
 
 
