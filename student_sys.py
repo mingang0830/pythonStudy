@@ -193,6 +193,12 @@ if __name__ == "__main__":
             elif side_menu == "2":
                 subject_id = input("검색할 과목 아이디를 입력해주세요 : ")
                 # 여러개 입력받아 select문에 넣기 어떻게 하는 건가요....
+                # 1,2,3,4
+                # split(,)
+                # -> [1,2,3,4]
+                # select ... from student where id in [1,2,3,4]
+                # [(1, ...), (2, ...), (3, ...), (4, ...)]
+                # for - loop
                 students = c.execute("select a.id, a.name from student a join register_class b on a.id = b.student_id where b.subject_id = '{}'".format(subject_id)).fetchall()
                 if not students:
                     print("수강신청한 학생이 없습니다.")
