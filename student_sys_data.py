@@ -1,6 +1,6 @@
 import sqlite3
 
-from store_sys_user import get_professor_obj
+from student_sys_user import get_professor_obj
 
 conn = sqlite3.connect("student_system.db")
 c = conn.cursor()

@@ -1,10 +1,10 @@
 import sqlite3
 
-from store_sys_data import (check_score, grade_to_db,
-                            get_students_by_set_type, make_students, the_most_registered_subject,
-                            the_most_get_c_grade, the_most_get_a_grade)
-from store_sys_user import (select_student_all_from_db, select_student_from_db, make_student_info,
-                            select_professor_all_from_db, select_professor_from_db, professor_info_from_db)
+from student_sys_data import (check_score, grade_to_db,
+                              get_students_by_set_type, make_students, the_most_registered_subject,
+                              the_most_get_c_grade, the_most_get_a_grade)
+from student_sys_user import (select_student_all_from_db, select_student_from_db, make_student_info,
+                              select_professor_all_from_db, select_professor_from_db, professor_info_from_db)
 
 conn = sqlite3.connect("student_system.db")
 c = conn.cursor()
