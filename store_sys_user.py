@@ -10,41 +10,41 @@ def make_user_map(data):
     }
 
 
-def get_student_name_by_id(id):
-    return c.execute("select name from student where id = (?)", (id,)).fetchone()[0]
+def get_student_name(student_id):
+    return c.execute("select name from student where id = (?)", (student_id,)).fetchone()[0]
 
 
-def get_register_class_of_student_by_student_id(id):
+def get_register_class_of_student_from_db(student_id):
     return c.execute(
         "select subject.id, subject.name, professor.name, register_class.grade "
         "from register_class join subject on register_class.subject_id = subject.id "
-        "join professor on subject.professor_id = professor.id where register_class.student_id = (?)", (id,)).fetchall()
+        "join professor on subject.professor_id = professor.id "
+        "where register_class.student_id = (?)", (student_id,)).fetchall()
 
 
-def make_student_info(id):
-    student_info = {get_student_name_by_id(id): get_register_class_of_student_by_student_id(id)}
-    return student_info
+def make_student_info(student_id):
+    return {get_student_name(student_id): get_register_class_of_student_from_db(student_id)}
 
 
-def select_student_all():
-    print(c.execute("select id, name from student").fetchall())
+def select_student_all_from_db():
+    return c.execute("select id, name from student").fetchall()
 
 
-def select_student_by_id_from_db(id):
-    return c.execute("select id, name from student where id = (?)", (id,)).fetchone()
+def select_student_from_db(student_id):
+    return c.execute("select id, name from student where id = (?)", (student_id,)).fetchone()
 
 
-def insert_student_to_db(id, name):
-    return c.execute("insert into student values(?,?)", (id, name))
+def insert_student_to_db(student_id, name):
+    return c.execute("insert into student values(?,?)", (student_id, name))
 
 
-def get_student_by_id(id):
-    data = select_student_by_id_from_db(id)
+def get_student(student_id):
+    data = select_student_from_db(student_id)
     return make_user_map(data)
 
 
-def create_student(id, name):
-    return make_user_map(insert_student_to_db(id, name))
+def create_student(student_id, name):
+    return make_user_map(insert_student_to_db(student_id, name))
 
 
 class Student:
@@ -66,36 +66,37 @@ class Student:
         return self.name
 
 
-def get_student_obj_by_id(id):
-    data = get_student_by_id(id)
+def get_student_obj(student_id):
+    data = get_student(student_id)
     return Student(id=data["id"], name=data["name"])
 
 
-def professor_info_by_id(id):
+def professor_info_from_db(id):
     return c.execute(
         "select professor.name, subject.id, subject.name, count(register_class.student_id) "
         "from professor join subject on professor.id = subject.professor_id "
         "join register_class on subject.id = register_class.subject_id where subject.professor_id = (?)", (id,)).fetchall()
 
-def select_professor_all():
-    print(c.execute("select id, name from professor").fetchall())
+
+def select_professor_all_from_db():
+    return c.execute("select id, name from professor").fetchall()
 
 
-def select_professor_by_id_from_db(id):
-    return c.execute("select id, name from professor where id = (?)", (id,)).fetchone()
+def select_professor_from_db(professor_id):
+    return c.execute("select id, name from professor where id = (?)", (professor_id,)).fetchone()
 
 
-def insert_professor_to_db(id, name):
-    c.execute("insert into professor values(?,?)", (id, name))
+def insert_professor_to_db(professor_id, name):
+    c.execute("insert into professor values(?,?)", (professor_id, name))
 
 
-def get_professor_by_id(id):
-    data = select_professor_by_id_from_db(id)
+def get_professor(professor_id):
+    data = select_professor_from_db(professor_id)
     return make_user_map(data)
 
 
-def create_professor(id, name):
-    return make_user_map(insert_professor_to_db(id, name))
+def create_professor(professor_id, name):
+    return make_user_map(insert_professor_to_db(professor_id, name))
 
 
 class Pro:
@@ -113,7 +114,7 @@ class Pro:
         return self.name
 
 
-def get_professor_obj_by_id(id):
-    data = get_professor_by_id(id)
+def get_professor_obj(professor_id):
+    data = get_professor(professor_id)
     return Pro(id=data["id"], name=data["name"])
 
