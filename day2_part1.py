@@ -7,15 +7,13 @@ for i in line:
     lst.append(i.split(": "))
 
 dict = {}
-for i in lst:
+for idx, i in enumerate(lst):
     value = i[0].split()
-    dict[i[1]] = [list(map(int, value[0].split("-"))), value[1]]
-
+    dict[idx] = [i[1], list(map(int, value[0].split("-"))), value[1]]
 
 count = 0
 for key, value in dict.items():
-    if value[0][0] <= key.count(value[1]) <= value[0][1]:
+    if value[1][0] <= value[0].count(value[2]) <= value[1][1]:
         count += 1
-        print(value, key, count)
 
-
+print(count)
