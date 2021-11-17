@@ -4,10 +4,9 @@ with open(file_path) as f:
 
 lst = list(map(int, line))
 
-a = 1
+
 for i in range(len(lst)):
-    for j in range(len(lst[:a])):
+    for j in range(i, len(lst)):
         if lst[i] + lst[j] == 2020:
             print(lst[i] * lst[j])
-    a += 1
 
