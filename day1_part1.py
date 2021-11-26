@@ -9,4 +9,3 @@ for i in range(len(lst)):
     for j in range(i, len(lst)):
         if lst[i] + lst[j] == 2020:
             print(lst[i] * lst[j])
-

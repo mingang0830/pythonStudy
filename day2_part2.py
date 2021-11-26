@@ -15,16 +15,16 @@ for ele in lst:
                  "given_char": given_char,
                  "given_string": ele[1]})
 
-count = 0
-for datum in data:
-    first_position_char = datum["given_string"][datum["first"]]
-    second_position_char = datum["given_string"][datum["second"]]
-    if first_position_char == datum["given_char"] and second_position_char != datum["given_char"]:
-        count += 1
-    elif second_position_char == datum["given_char"] and first_position_char != datum["given_char"]:
-        count += 1
-
-print(count)
+# count = 0
+# for datum in data:
+#     first_position_char = datum["given_string"][datum["first"]]
+#     second_position_char = datum["given_string"][datum["second"]]
+#     if first_position_char == datum["given_char"] and second_position_char != datum["given_char"]:
+#         count += 1
+#     elif second_position_char == datum["given_char"] and first_position_char != datum["given_char"]:
+#         count += 1
+#
+# print(count)
 
 dict = {}
 for idx, i in enumerate(lst):

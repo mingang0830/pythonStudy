@@ -16,16 +16,19 @@ def count_trees_1(x, y):
     return count
 
 
+
+
 if __name__ == "__main__":
     print(count_trees_1(3, 1))
-
-    tree = 0
-    a = 0
-    b = len(lines[0])
-
-    for i in range(len(lines)):
-        if lines[i][a] == "#":
-            tree += 1
-        a = (a + 3) % b  # 세칸씩 오른쪽으로 넘어가면서 범위를 벗어날 경우를 위해 길 길이를 나눈 나머지 만큼 넘어가기
-
-    print(tree)
+#     print(count_trees_1(3, 1))
+#
+#     tree = 0
+#     a = 0
+#     b = len(lines[0])
+#
+#     for i in range(len(lines)):
+#         if lines[i][a] == "#":
+#             tree += 1
+#         a = (a + 3) % b  # 세칸씩 오른쪽으로 넘어가면서 범위를 벗어날 경우를 위해 길 길이를 나눈 나머지 만큼 넘어가기
+#
+#     print(tree)
