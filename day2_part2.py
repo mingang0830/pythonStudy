@@ -6,6 +6,26 @@ lst = []
 for i in line:
     lst.append(i.split(": "))
 
+data = []
+for ele in lst:
+    locations, given_char = ele[0].split(" ")
+    first, second = locations.split("-")
+    data.append({"first": int(first) - 1,
+                 "second": int(second) - 1,
+                 "given_char": given_char,
+                 "given_string": ele[1]})
+
+count = 0
+for datum in data:
+    first_position_char = datum["given_string"][datum["first"]]
+    second_position_char = datum["given_string"][datum["second"]]
+    if first_position_char == datum["given_char"] and second_position_char != datum["given_char"]:
+        count += 1
+    elif second_position_char == datum["given_char"] and first_position_char != datum["given_char"]:
+        count += 1
+
+print(count)
+
 dict = {}
 for idx, i in enumerate(lst):
     value = i[0].split()
