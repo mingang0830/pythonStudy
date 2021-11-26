@@ -11,26 +11,14 @@ print("part1 : {}".format(sum([calc(number) for number in numbers])))
 
 
 lst2 = []
-# for number2 in numbers:
-#     num = calc(number2)
-#     lst2.append(num)
-#     while True:
-#         if num > 6:
-#             num = calc(num)
-#             lst2.append(num)
-#         else:
-#             break
-
 for number2 in numbers:
-    sum_number = 0
     num = calc(number2)
-    sum_number += num
+    lst2.append(num)
     while True:
-        if num > 6:
-            num = calc(num)
-            sum_number += num
-        else:
-            lst2.append(sum_number)
+        result = calc(num)
+        if result <= 0:
             break
+        lst2.append(result)
+        num = calc(num)
 
 print("part2 : {}".format(sum(lst2)))
