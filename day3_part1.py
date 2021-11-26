@@ -16,8 +16,6 @@ def count_trees_1(x, y):
     return count
 
 
-
-
 if __name__ == "__main__":
     print(count_trees_1(3, 1))
 #     print(count_trees_1(3, 1))
