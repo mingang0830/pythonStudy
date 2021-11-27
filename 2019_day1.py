@@ -9,16 +9,14 @@ def calc(number):
 
 print("part1 : {}".format(sum([calc(number) for number in numbers])))
 
-
 lst2 = []
-for number2 in numbers:
-    num = calc(number2)
-    lst2.append(num)
+for num in numbers:
+    cur_num = num
     while True:
-        result = calc(num)
+        result = calc(cur_num)
         if result <= 0:
             break
         lst2.append(result)
-        num = calc(num)
+        cur_num = result
 
 print("part2 : {}".format(sum(lst2)))
