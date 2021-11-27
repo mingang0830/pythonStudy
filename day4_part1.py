@@ -1,21 +1,23 @@
 file_path = "/venvs/adventofcode_4.txt"
 with open(file_path) as f:
-    line = f.read()
+    line = f.read().splitlines()
+print(line)
 
-line = line.split("\n\n")
-passports = []
+data = [['hcl:5d90f0 cid:270 ecl:#66dc9c hgt:62cm byr:1945 pid:63201172 eyr:2026',],
+        ['ecl:amb byr:1943 iyr:2014 eyr:2028', 'pid:333051831',],
+       ]
 
-
-for i in line:
-    if "\n" in i:
-        i = i.replace("\n", " ")
-    passports.append(i)
-
-count = 0
-
-for i in passports:
-    if "byr" and "iyr" and "eyr" and "hgt" and "hcl" and "ecl" and "pid" in i:
-        count += 1
-
-
-print(count)
+# passports = []
+#
+#
+# for i in line:
+#     if "\n" in i:
+#         i = i.replace("\n", " ")
+#     passports.append(i)
+#
+# count = 0
+#
+# print(passports)
+#
+#
+# print(count)
