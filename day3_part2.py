@@ -1,6 +1,20 @@
+from day3_part1 import count_trees_1
+
 file_path = "/venvs/adventofcode_3.txt"
 with open(file_path) as f:
     line = f.read().splitlines()
+
+pos_list = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
+counts = []
+for x, y in pos_list:
+    counts.append(count_trees_1(x, y))
+
+
+result = 1
+for count in counts:
+    result *= count
+
+print(result)
 
 
 def count_trees(right, down):

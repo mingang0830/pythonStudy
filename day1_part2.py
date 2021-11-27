@@ -1,7 +1,3 @@
-"""
-리스트에서 3개의 합이 2020인 수의 곱
-"""
-
 file_path = "/venvs/adventofcode.txt"
 with open(file_path) as f:
     line = f.read().splitlines()
