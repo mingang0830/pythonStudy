@@ -9,12 +9,26 @@ def int_numbers(str_list):
 
 print("part1 : {}".format(sum(int_numbers(str_lst))))
 
+# [+1 -2 +3 -4 +5 ...]
+# [1 -1 2 -2 3 ...]
+
+def part2():
+    cur_sum = 0
+    sum_list = []
+    while True:
+        for number in int_numbers(str_list)
+            cur_sum += number
+            sum_list.append(cur_sum)
+            if sum_list.count(cur_sum) == 2:
+                return cur_sum
+
+
 sum = 0
 sum_lst = []
 for i in int_numbers(str_lst):
     sum += i
     sum_lst.append(sum)
-
+# [0 1 3 6 10 15]
 a = 0
 breaker = True
 while True:

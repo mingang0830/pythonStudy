@@ -7,6 +7,31 @@ two_chars = []
 three_chars = []
 count_two = 0
 count_three = 0
+# abcdedgad
+# 1*1 = 1
+for row in puzzle:
+    # row == "aaaaaaaab"
+    #[1 2 3 4 4] -> set([1 2 3 4 4]) -> [1 2 3 4]
+    #"aaaaaaaab" -> set("aaaaaaaab") -> ["a" "b"]
+    #{"keys": "value"}
+    # "abbbcccddd" -> {"a": 1, "b": 3, "c": 4, "d": 5}
+    result = {}
+    for ch in row
+        if ch not in result:
+            result[ch] = 1
+        else:
+            result[ch] += 1
+    
+    for k, v in result.items():
+        if v == 2:
+            count_two += 1
+        elif v == 3:
+            count_three += 1
+
+count_two * count_three
+
+
+
 for i in puzzle:
     for j in i:
         if i.count(j) == 2:
@@ -31,6 +56,11 @@ def compare(str1, str2):
             result_count += 1
     return result_count
 
+# abcde, abbde
+# len(abcde)== 5 
+# 5 == 4 + 1
+def is_one_character_diffrent(str1, str2):
+    return len(str1) == compare(str1, str2) + 1
 
 def same_chars(str1, str2):
     result_letters_lst = []
@@ -41,11 +71,17 @@ def same_chars(str1, str2):
 
 
 result_letters = None
+# "asd" "dse" "qwe" ...
+#->
+# [("asd" "dse"), ("asd" "qwe") ...]
+pairs = []
 for str1_idx in range(len(puzzle)):
     for str2_idx in range(str1_idx+1, len(puzzle)):
-        result_count = compare(puzzle[str1_idx], puzzle[str2_idx])
-        if result_count == len(puzzle[str1_idx]) - 1:
-            result_letters = same_chars(puzzle[str1_idx], puzzle[str2_idx])
+        pairs.append((puzzle[str1_idx], puzzle[str2_idx]))
+
+for str1, str2 in pairs:
+    if is_one_character_diffrent(str1, str2):
+        result_letters = same_chars(str1, str2)
 
 print("part2 : {}".format(result_letters))
 

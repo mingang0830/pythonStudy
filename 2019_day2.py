@@ -8,7 +8,6 @@ part1_data = data[:]
 part1_data[1] = 12
 part1_data[2] = 2
 
-
 def intcode(input_data):
     data = input_data[:]
     for idx in range(0, len(data), 4):
