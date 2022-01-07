@@ -31,7 +31,7 @@ def move(path):
     return wire_path
 
 
-def find_closest_point(intersection_points):
+def find_closest_distance(intersection_points):
     distance = []
     for point in intersection_points:
         distance.append(abs(point[0]) + abs(point[1]))
@@ -39,5 +39,14 @@ def find_closest_point(intersection_points):
     return min(distance)
 
 
-intersection_points = set(move(first_path)) & set(move(second_path))
-print("part1 : {}".format(find_closest_point(intersection_points)))
+first_path = move(first_path)
+second_path = move(second_path)
+intersection_points = set(first_path) & set(second_path)
+
+steps = []
+for point in intersection_points:
+    steps.append((first_path.index(point) + 1, second_path.index(point) + 1))
+
+
+print("part1 : {}".format(find_closest_distance(intersection_points)))
+print("part2 : {}".format(find_closest_distance(steps)))
