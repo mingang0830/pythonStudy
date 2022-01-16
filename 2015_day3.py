@@ -20,8 +20,8 @@ def move(dir_, x, y):
 
 
 for dir_ in puzzle:
-    house_location.append((x, y))
     x, y = move(dir_, x, y)
+    house_location.append((x, y))
 
 
 santa_x, santa_y = 0, 0
